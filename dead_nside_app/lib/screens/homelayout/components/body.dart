@@ -40,9 +40,6 @@ class Body extends State<MainScreenBody> {
           .then((Position position) {
         setState(() async {
           _currentPosition = position;
-          print("Current: $_currentPosition");
-          print(lat);
-          print(lon);
           var _answer;
           var queryParameters = {
             "lat": _currentPosition.latitude.toString(),
@@ -54,12 +51,9 @@ class Body extends State<MainScreenBody> {
               "api.openweathermap.org", "/data/2.5/weather", queryParameters);
           //var req = Uri.parse(
           //    "api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}");
-          print(req);
 
           http.Response response = await http.get(req);
           _answer = jsonDecode(response.body);
-          print(req);
-          print(_answer);
           setState(() {
             _city = _answer["name"];
             _country = _answer["sys"]["country"];
